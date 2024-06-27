@@ -134,6 +134,7 @@ function PublicInventory(props: InventoryProps) {
         },
       })
       .then((response) => {
+        console.log(response.data);
         // Convert UTC timestamps to EST
         const convertedInventory = response.data.map((disc: Disc) => ({
           ...disc,
@@ -162,7 +163,7 @@ function PublicInventory(props: InventoryProps) {
         // setFilteredInventory(filtered);
         const filteredInventory = sortedInventory.filter((disc: Disc) => {
           const isMatch =
-            disc.phoneNumber.includes(searchQuery) ||
+            (disc.phoneNumber && disc.phoneNumber.includes(searchQuery)) ||
             disc.disc.toLowerCase().includes(searchQuery.toLowerCase()) ||
             disc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             disc.brand?.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -413,7 +414,9 @@ function PublicInventory(props: InventoryProps) {
                           </p>
                           <p className="detailed-text">
                             <strong>Phone Number: </strong>
-                            {maskPhoneNumber(disc.phoneNumber)}
+                            {disc.phoneNumber === null
+                              ? "No Phone Number"
+                              : maskPhoneNumber(disc.phoneNumber)}
                           </p>
                           <p className="detailed-text">
                             <strong>Brand: </strong>

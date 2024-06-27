@@ -18,8 +18,8 @@ export interface Disc {
   course: string;
   name: string;
   disc: string;
-  phoneNumber: string;
-  bin: string;
+  phoneNumber: string | null;
+  bin: string | null;
   dateFound: string;
   dateTexted?: string | null;
   dateClaimed?: string | null;
@@ -45,7 +45,7 @@ export enum DiscStateString {
 }
 
 export const API_BASE_URL = "https://api.discrescuenetwork.com"; //production URL
-//export const API_BASE_URL = "http://127.0.0.1:3001"; // local testing
+//export const API_BASE_URL = "http://127.0.0.1:5000"; // local testing
 
 function App() {
   const course = process.env.REACT_APP_COURSE_NAME;
